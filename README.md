@@ -2,8 +2,8 @@
 How to run the Demo application:
 - Download or clone the Repository
 - Navigate to the folder where the Repository was cloned/downloaded
-- Open up the CreditApplicationHomework Folder and navigate to the CreditApplicationsTask folder
-- There you will see a CreditApplicationsDemo.sln file (Visual Studio Solution File), open it
+- Open up the "CreditApplicationHomework" Folder and navigate to the "CreditApplicationsTask" folder
+- There you will see a "CreditApplicationsDemo.sln" file (Visual Studio Solution File), open it
 - After the Visual Studio IDE is opened navigate to **~/CreditApplicationsTask/CreditApplicationsDemo/Program.cs** in the Solution Explorer and open it
 - Once there, build the solution
 - Run the program
