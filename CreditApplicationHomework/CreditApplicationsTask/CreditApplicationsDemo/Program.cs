@@ -41,6 +41,8 @@ namespace CreditApplicationsDemo
             {
                 Console.WriteLine($"Validation Error: {ex.Message}");
             }
+
+            Console.ReadKey();
         }
 
         static decimal ReadDecimalInput(string prompt)
