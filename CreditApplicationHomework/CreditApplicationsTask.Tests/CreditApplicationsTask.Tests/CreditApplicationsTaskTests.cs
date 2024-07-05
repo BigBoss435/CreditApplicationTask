@@ -7,8 +7,10 @@ namespace CreditApplicationsTask.Tests
 {
     public class CreditApplicationsTaskTests
     {
+        // Creating an instanceof the service to be tested
         private readonly CreditDecisionService _service = new CreditDecisionService();
-
+        
+        // Defining parametrized tests for the MakeCreditDecision method
         [Theory]
         [InlineData(1000, 5, 0, "No", 3)]          // term < 6 months, amount within range, low total debt
         [InlineData(1000, 5, 40000, "No", 6)]      // term < 6 months, high total debt
@@ -24,19 +26,23 @@ namespace CreditApplicationsTask.Tests
         [InlineData(5000, 12, 25000, "Yes", 4)]     // Applied amount within range, high total future debt
         public void MakeCreditDecision_ReturnExpectedResults(decimal creditAmount, int term, decimal existingCredit, string expectedDecision, decimal expectedRate)
         {
+            // Arrange the data
             var request = new CreditApplicationRequest
             {
                 CreditAmount = creditAmount,
                 Term = term,
                 ExistingCreditAmount = existingCredit,
             };
-
+            
+            // Get a response from the service
             var response = _service.MakeCreditDecision(request);
-
+            
+            // Assert the results
             Assert.Equal(expectedDecision, response.Decision);
             Assert.Equal(expectedRate, response.InterestRate);
         }
-
+        
+        // Defining parametrized tests to check for validation exceptions on invalid input
         [Theory]
         [InlineData(1500, 12, 0)]       //Invalid credit amount
         [InlineData(70000, 12, 0)]      //Invalid credit amount
@@ -45,13 +51,15 @@ namespace CreditApplicationsTask.Tests
         [InlineData(5000, 12, 2)]       //Valid data
         public void MakeCreditDecision_ThrowsValidationException_ForInvalidInputs(decimal creditAmount, int term, decimal existingCredit)
         {
+            // Arrange the data
             var request = new CreditApplicationRequest
             {
                 CreditAmount = creditAmount,
                 Term = term,
                 ExistingCreditAmount = existingCredit
             };
-
+            
+            // Get a response from the service and assert the results
             Assert.Throws<ValidationException>(() => _service.MakeCreditDecision(request));
         }
     }
